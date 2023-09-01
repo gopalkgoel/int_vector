@@ -86,7 +86,7 @@ int main() {
   for(size_t i=0;i<vec.size;i++) printf("vec[i] = %d\n",get(&vec,i));
 
   printf("vec[100] = %d\n", get(&vec,100));
-  printf("did I make it this far?\n");
+  printf("did I make it this far? blah\n");
 
 
   return 0;
