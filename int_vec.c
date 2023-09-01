@@ -83,7 +83,11 @@ int main() {
 
   printf("The vector has capacity %zu and size %zu\n", vec.cap, vec.size);
 
-  for(size_t i=0;i<vec.size;i++) printf("vec[i] = %d\n",vec.data[i]);
+  for(size_t i=0;i<vec.size;i++) printf("vec[i] = %d\n",get(&vec,i));
+
+  printf("vec[100] = %d\n", get(&vec,100));
+  printf("did I make it this far?\n");
+
 
   return 0;
 }
