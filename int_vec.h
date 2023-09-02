@@ -14,5 +14,6 @@ void init(ivec* vec);
 void pb(ivec* vec, int x);
 void pop(ivec* vec);
 int get(ivec* vec, size_t i);
+void print_vector(ivec* vec);
 
 #endif

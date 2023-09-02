@@ -7,7 +7,11 @@ typedef struct {
   size_t size;
 } ivec;
 
+// you can also pass a vector with stuff here, and it'll just set it to length 0
 void init(ivec* vec) {
+  if(vec->size!=0) {
+    free(vec->data);
+  }
   vec->size = 0;
   vec->cap = 1;
   vec->data = (int*)malloc(sizeof(int));
@@ -27,11 +31,11 @@ void pb(ivec* vec, int x) {
   
   int* new_data = (int*)malloc(2*sizeof(int)*vec->size);
   if(new_data == NULL) {
-    perror("couldn't allocate memory\n");
+    perror("couldn't allocate memory in pushing\n");
     exit(EXIT_FAILURE);
   }
 
-  for(int i=0;i<vec->size;i++) {
+  for(size_t i=0;i<vec->size;i++) {
     new_data[i] = vec->data[i];
   }
 
@@ -54,10 +58,10 @@ void pop(ivec* vec) {
     int* new_data = (int*)malloc(sizeof(int)*vec->size*2);
     vec->cap = 2*vec->size;
     if(new_data == NULL) {
-      perror("couldn't allocate memory\n");
+      perror("couldn't allocate memory in popping\n");
       exit(EXIT_FAILURE);
     }
-    for(int i=0;i<vec->size;i++) {
+    for(size_t i=0;i<vec->size;i++) {
       new_data[i] = vec->data[i];
     }
 
@@ -67,27 +71,15 @@ void pop(ivec* vec) {
 }
 
 int get(ivec* vec, size_t i) {
-  if(i<0 || i>=vec->size) {
+  if(i>=vec->size) {
     perror("index out of bounds\n");
     exit(EXIT_FAILURE);
   }
   return vec->data[i];
 }
 
-int main() {
-  ivec vec;
-  init(&vec);
+void print_vector(ivec* vec) {
+  printf("The vector has capacity %zu and size %zu\n", vec->cap, vec->size);
 
-  for(int i=0;i<40;i++) pb(&vec, i);
-  for(int i=0;i<15;i++) pop(&vec);
-
-  printf("The vector has capacity %zu and size %zu\n", vec.cap, vec.size);
-
-  for(size_t i=0;i<vec.size;i++) printf("vec[i] = %d\n",get(&vec,i));
-
-  printf("vec[100] = %d\n", get(&vec,100));
-  printf("did I make it this far? blah\n");
-
-
-  return 0;
+  for(size_t i=0;i<vec->size;i++) printf("vec[i] = %d\n",get(vec,i));
 }
