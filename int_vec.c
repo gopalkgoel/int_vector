@@ -81,5 +81,5 @@ int get(ivec* vec, size_t i) {
 void print_vector(ivec* vec) {
   printf("The vector has capacity %zu and size %zu\n", vec->cap, vec->size);
 
-  for(size_t i=0;i<vec->size;i++) printf("vec[i] = %d\n",get(vec,i));
+  for(size_t i=0;i<vec->size;i++) printf("vec[%zu] = %d\n",i,get(vec,i));
 }
